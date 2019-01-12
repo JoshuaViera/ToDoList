@@ -11,6 +11,13 @@ import UIKit
 class ItemListVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    
+    var items: [Item]?{
+        didSet{
+            tableView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -22,6 +29,23 @@ class ItemListVC: UIViewController {
         //NOT BEST PRACTICES
         //CUSTOM DELEGATION WOULD BE BEST USE CASE HERE....
         tableView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ItemsNav"{
+        guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? ItemDetailVC else {
+            fatalError("indexPath, detailVC nil")
+        }
+            let indexNum = indexPath.row
+            let items = ItemModel.getItems()[indexPath.row]
+            detailVC.items = items
+            detailVC.index = indexNum
+           
+            
+        } else if segue.identifier == "AddNav"{
+            
+        }
+        
     }
 
 }

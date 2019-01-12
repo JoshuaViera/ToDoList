@@ -9,22 +9,53 @@
 import UIKit
 
 class ItemDetailVC: UIViewController {
-
+    
+    @IBOutlet weak var titleTextView: UITextView!
+    @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet weak var edit: UIBarButtonItem!
+    
+    var items: Item!
+    var index: Int!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        updateUI()
+        title = items.title
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func updateUI(){
+        titleTextView.text = items?.title
+        descriptionTextView.text = items?.description
     }
-    */
-
+    
+    
+    
+    
+    @IBAction func editButton(_ sender: UIBarButtonItem){
+        titleTextView.becomeFirstResponder()
+        descriptionTextView.becomeFirstResponder()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneEditing))
+        titleTextView.isEditable = true
+        descriptionTextView.isEditable = true
+        
+    }
+    
+    @objc private func doneEditing() {
+        print("Done Editing")
+        let date = Date()
+        let isoDateFormatter = ISO8601DateFormatter()
+        isoDateFormatter.formatOptions = [.withFullDate ,.withFullTime,.withInternetDateTime, .withTimeZone,.withDashSeparatorInDate]
+        let timeStamp = isoDateFormatter.string(from: date)
+        if let title = titleTextView.text {
+            if let description = descriptionTextView.text {
+                let newItem = Item.init(title: title, description: description, createdAt: timeStamp)
+                ItemModel.update(newItem: newItem, atIndex: index)
+                navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(doneEditing))
+                titleTextView.isEditable = false
+                descriptionTextView.isEditable = false
+                titleTextView.resignFirstResponder()
+                descriptionTextView.resignFirstResponder()
+            }
+        }
+    }
+    
 }

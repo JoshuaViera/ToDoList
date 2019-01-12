@@ -29,6 +29,7 @@ final class ItemModel {
         } else {
             print("\(filename) does not exist")
         }
+        items = items.sorted{$0.date > $1.date}
         return items
     }
     
@@ -53,4 +54,10 @@ final class ItemModel {
         items.remove(at: index)
         save()
     }
+    static func update(newItem:Item, atIndex: Int) {
+        items[atIndex] = newItem
+        save()
+    }
+    
+   
 }

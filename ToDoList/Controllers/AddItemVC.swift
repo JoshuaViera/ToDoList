@@ -65,15 +65,5 @@ extension AddItemVC : UITextViewDelegate {
             textView.textColor = .black
         }
     }
-//    func textViewDidEndEditing(_ textView: UITextView) {
-//        <#code#>
-//    }
+
 }
-
-//is slectable
-//is editable = false (when it is not being edited)
-// textview.isEditable = false
-
-//textView.becomeFirstRessponder (brings up keyboard)
-//navigationItem.rightBarItem = UIBarButtonItem(Title: "Done, Style .plain, target self, selector: #selector"
-//(Done Edititng)

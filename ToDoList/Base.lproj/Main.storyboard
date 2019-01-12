@@ -45,7 +45,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="nnT-U3-PXl" kind="show" id="O7f-6y-A0Y"/>
+                                            <segue destination="nnT-U3-PXl" kind="show" identifier="ItemsNav" id="O7f-6y-A0Y"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -64,7 +64,7 @@
                     <navigationItem key="navigationItem" title="To Do List" id="P4b-vh-EQc">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="bNl-k5-dsl">
                             <connections>
-                                <segue destination="tDb-XU-Vam" kind="presentation" id="jvg-Xt-HjT"/>
+                                <segue destination="tDb-XU-Vam" kind="presentation" identifier="AddNav" id="jvg-Xt-HjT"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -136,19 +136,54 @@
             </objects>
             <point key="canvasLocation" x="1696.8" y="80.50974512743629"/>
         </scene>
-        <!--Title-->
+        <!--Item DetailVC-->
         <scene sceneID="Pug-iD-0Ug">
             <objects>
                 <viewController id="nnT-U3-PXl" customClass="ItemDetailVC" customModule="ToDoList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CaJ-mx-2B3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="TItleThatISetAlready" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="v5w-Mn-FxR">
+                                <rect key="frame" x="0.0" y="64" width="375" height="80"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="uew-Xr-Nxq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Description that I wrote Already" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Nsg-fu-YJd">
+                                <rect key="frame" x="0.0" y="144" width="375" height="479"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Nsg-fu-YJd" firstAttribute="top" secondItem="v5w-Mn-FxR" secondAttribute="bottom" id="1hf-3m-B6k"/>
+                            <constraint firstItem="v5w-Mn-FxR" firstAttribute="top" secondItem="bSh-Ke-nyU" secondAttribute="top" id="BxM-9A-6dz"/>
+                            <constraint firstItem="bSh-Ke-nyU" firstAttribute="bottom" secondItem="Nsg-fu-YJd" secondAttribute="bottom" id="X8h-7h-bBu"/>
+                            <constraint firstItem="Nsg-fu-YJd" firstAttribute="leading" secondItem="bSh-Ke-nyU" secondAttribute="leading" id="Xb8-QZ-ZR2"/>
+                            <constraint firstItem="bSh-Ke-nyU" firstAttribute="trailing" secondItem="v5w-Mn-FxR" secondAttribute="trailing" id="xP4-Nf-dgH"/>
+                            <constraint firstItem="bSh-Ke-nyU" firstAttribute="trailing" secondItem="Nsg-fu-YJd" secondAttribute="trailing" id="zTK-P0-Fmx"/>
+                            <constraint firstItem="v5w-Mn-FxR" firstAttribute="leading" secondItem="bSh-Ke-nyU" secondAttribute="leading" id="zuW-cV-6mv"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="bSh-Ke-nyU"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="GUt-LR-HED">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="8iu-5d-u1B"/>
+                    <navigationItem key="navigationItem" id="GUt-LR-HED">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="8iu-5d-u1B">
+                            <connections>
+                                <action selector="editButton:" destination="nnT-U3-PXl" id="3yz-Dp-6uk"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="descriptionTextView" destination="Nsg-fu-YJd" id="Kab-Ji-bPK"/>
+                        <outlet property="edit" destination="8iu-5d-u1B" id="MYs-Le-Uhe"/>
+                        <outlet property="titleTextView" destination="v5w-Mn-FxR" id="el3-d1-Kkj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XZU-cJ-Q6A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
